@@ -1,12 +1,47 @@
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final PageController _pageController = PageController(viewportFraction: 0.75);
+  int _currentPage = 0;
+
+  final List<Map<String, dynamic>> _moringaCards = [
+    {
+      'title': 'What is Moringa',
+      'description': 'Learn more about how we use Moringa trees to cultivate our products.',
+      'image': 'assets/images/moringa_tree.jpg',
+      'action': 'Learn More'
+    },
+    {
+      'title': 'Moringa Benefits',
+      'description': 'Discover the amazing health and wellness benefits of Moringa.',
+      'image': 'assets/images/moringa_benefits.jpg',
+      'action': 'Explore Benefits'
+    },
+    {
+      'title': 'Our Products',
+      'description': 'Explore our range of premium Moringa-based skincare products.',
+      'image': 'assets/images/moringa_products.jpg',
+      'action': 'Shop Now'
+    },
+  ];
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAF7F0),
+      backgroundColor: const Color(0xFFFAF7F0), // Using splash page color scheme
       appBar: AppBar(
         backgroundColor: const Color(0xFF47734E),
         title: const Text(
@@ -19,62 +54,230 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
-            color: Color(0xFFFAF7F0),
-            onPressed: () {},
+            color: const Color(0xFFFAF7F0),
+            onPressed: () {
+              debugPrint('Search tapped');
+            },
           ),
           IconButton(
             icon: const Icon(Icons.shopping_bag),
-            color: Color(0xFFFAF7F0),
-            onPressed: () {},
+            color: const Color(0xFFFAF7F0),
+            onPressed: () {
+              debugPrint('Bag tapped');
+            },
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+      body: Column(
+        children: [
+          // Page indicator dots
+          _buildPageIndicator(),
+          
+          // Swipeable cards - main focus
+          Expanded(
+            child: _buildSwipeableCards(),
+          ),
+          
+          const SizedBox(height: 20),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLearnMoreSection() {
+    return Container(
+      margin: const EdgeInsets.all(20),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      decoration: BoxDecoration(
+        color: const Color(0xFFE8E5DC),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          const Expanded(
+            child: Text(
+              'Moringa Oil - Learn More',
+              style: TextStyle(
+                color: Color(0xFF3A1A14),
+                fontSize: 18,
+                fontFamily: 'GlacialIndifference',
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: const Color(0xFF47734E),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: const Icon(
+              Icons.arrow_forward,
+              color: Color(0xFFFAF7F0),
+              size: 20,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPageIndicator() {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(
+          _moringaCards.length,
+          (index) => Container(
+            width: _currentPage == index ? 24 : 8,
+            height: 8,
+            margin: const EdgeInsets.symmetric(horizontal: 4),
+            decoration: BoxDecoration(
+              color: _currentPage == index 
+                  ? const Color(0xFF47734E) 
+                  : const Color(0xFFE8E5DC),
+              borderRadius: BorderRadius.circular(4),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSwipeableCards() {
+    return PageView.builder(
+      controller: _pageController,
+      onPageChanged: (index) {
+        setState(() {
+          _currentPage = index;
+        });
+      },
+      itemCount: _moringaCards.length,
+      itemBuilder: (context, index) {
+        return AnimatedBuilder(
+          animation: _pageController,
+          builder: (context, child) {
+            double value = 0;
+            if (_pageController.position.haveDimensions) {
+              value = index.toDouble() - (_pageController.page ?? 0);
+              value = (value * 0.038).clamp(-1, 1);
+            }
+            return Transform.rotate(
+              angle: value,
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 30),
+                child: _buildMoringaCard(_moringaCards[index], index == _currentPage),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildMoringaCard(Map<String, dynamic> cardData, bool isActive) {
+    return Card(
+      elevation: isActive ? 12 : 6,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: const Color(0xFFFAF7F0),
+          borderRadius: BorderRadius.circular(20),
+          border: isActive 
+              ? Border.all(color: const Color(0xFF47734E), width: 2)
+              : null,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
+            // Image area with better visual indication
+            Container(
+              height: 160,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: const Color(0xFFE8E5DC),
+                borderRadius: BorderRadius.circular(12),
+                image: DecorationImage(
+                  image: AssetImage(cardData['image']),
+                  fit: BoxFit.cover,
+                  onError: (exception, stackTrace) {
+                    // Fallback if image doesn't exist
+                  },
+                ),
+              ),
+              child: const Center(
+                child: Icon(
+                  Icons.eco,
+                  size: 60,
+                  color: Color(0xFF47734E),
+                ),
+              ),
+            ),
+            
+            const SizedBox(height: 20),
+            
+            // Title
             Text(
-              'Welcome to Moringa Project',
-              style: TextStyle(
+              cardData['title'],
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'GlacialIndifference',
                 color: Color(0xFF3A1A14),
               ),
             ),
-            SizedBox(height: 12),
-            Text(
-              'Discover the natural benefits of Moringa for your skin, hair, and overall wellness.',
-              style: TextStyle(fontSize: 16, fontFamily: 'GlacialIndifference'),
-            ),
-            SizedBox(height: 24),
-            Text(
-              '🌿 Skin & Hair Benefits',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'GlacialIndifference',
+            
+            const SizedBox(height: 12),
+            
+            // Description
+            Expanded(
+              child: Text(
+                cardData['description'],
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'GlacialIndifference',
+                  color: Color(0xFF3A1A14),
+                  height: 1.4,
+                ),
               ),
             ),
-            SizedBox(height: 8),
-            Text(
-              'Moringa helps with dryness, redness, and irritation. It supports glowing skin and stronger hair over time.',
-              style: TextStyle(fontSize: 16, fontFamily: 'GlacialIndifference'),
-            ),
-            SizedBox(height: 24),
-            Text(
-              '✨ Featured Products',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'GlacialIndifference',
+            
+            const SizedBox(height: 20),
+            
+            // Action button
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {
+                  debugPrint('${cardData['action']} pressed');
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF47734E),
+                  foregroundColor: const Color(0xFFFAF7F0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.add_shopping_cart, size: 20),
+                    const SizedBox(width: 8),
+                    Text(
+                      cardData['action'],
+                      style: const TextStyle(
+                        fontFamily: 'GlacialIndifference',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              '- Moringa Facial Oil\n- Herbal Hair Mist\n- Rejuvenating Body Balm',
-              style: TextStyle(fontSize: 16, fontFamily: 'GlacialIndifference'),
             ),
           ],
         ),
@@ -82,5 +285,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-
