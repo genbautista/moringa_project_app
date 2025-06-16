@@ -17,3 +17,11 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+  fonts:
+    - family: GlacialIndifference
+      fonts:
+        - asset: assets/images/fonts/GlacialIndifference-Bold.otf
+        - asset: assets/images/fonts/GlacialIndifference-Italic.otf
+        - asset: assets/images/fonts/GlacialIndifference-Regular.otf
