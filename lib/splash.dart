@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'homepage.dart';
+import 'main_navigation.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -23,15 +23,15 @@ class _SplashPageState extends State<SplashPage>
     );
 
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
-
     _controller.forward();
 
-    // Auto navigate after 3 seconds
+    // Auto navigate after 5 seconds to MainNavigation instead of HomePage
     Future.delayed(const Duration(seconds: 5), () {
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const HomePage()),
-      );
+      if (mounted) { // Check if widget is still mounted
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const MainNavigation()),
+        );
+      }
     });
   }
 
