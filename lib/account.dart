@@ -19,7 +19,7 @@ class AccountPage extends StatelessWidget {
       ),
       body: const Center(
         child: Text(
-          'Account page coming soon!',
+          'Account',
           style: TextStyle(
             fontSize: 18,
             fontFamily: 'GlacialIndifference',
