@@ -25,9 +25,9 @@ class _SplashPageState extends State<SplashPage>
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
     _controller.forward();
 
-    // Auto navigate after 5 seconds to MainNavigation instead of HomePage
-    Future.delayed(const Duration(seconds: 5), () {
-      if (mounted) { // Check if widget is still mounted
+    // auto navigate after 5 seconds to main_navigation instead of HomePage
+    Future.delayed(const Duration(seconds: 10), () {
+      if (mounted) { // check if widget is still mounted
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const MainNavigation()),
         );
