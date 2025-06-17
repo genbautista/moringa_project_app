@@ -1,4 +1,5 @@
 # Moringa Project App
+<img src="assets/images/productimage.webp" width="300" height="300">
 
 <h2>About Moringa Project</h2>
 <p>We want this app to be an informational/educational place where people can learn about moringa’s benefits. This app will address wellness concerns. Users will be able to feel confident about their purchase if they understand what solutions moringa project can provide. 
