@@ -6,9 +6,9 @@ class ShopPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final products = [
-      {'name': 'Facial Oil', 'price': '\$29'},
-      {'name': 'Hair Mist', 'price': '\$19'},
-      {'name': 'Body Balm', 'price': '\$24'},
+      {'name': 'none', 'none': '\$00'},
+      {'name': 'none', 'none': '\$00'},
+      {'name': 'none', 'none': '\$00'},
     ];
 
     return Scaffold(
