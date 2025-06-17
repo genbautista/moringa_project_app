@@ -15,19 +15,19 @@ class _HomePageState extends State<HomePage> {
     {
       'title': 'What is Moringa',
       'description': 'Learn more about how we use Moringa trees to cultivate our products.',
-      'image': 'assets/images/moringa_tree.jpg',
+      'image': 'assets/images/whatismoringa.webp',
       'action': 'Learn More'
     },
     {
       'title': 'Moringa Benefits',
       'description': 'Discover the amazing health and wellness benefits of Moringa.',
-      'image': 'assets/images/moringa_benefits.jpg',
+      'image': 'assets/images/benefits.webp',
       'action': 'Explore Benefits'
     },
     {
       'title': 'Our Products',
       'description': 'Explore our range of premium Moringa-based skincare products.',
-      'image': 'assets/images/moringa_products.jpg',
+      'image': 'assets/images/productimage.webp',
       'action': 'Shop Now'
     },
   ];
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAF7F0), // Using splash page color scheme
+      backgroundColor: const Color(0xFFFAF7F0), 
       appBar: AppBar(
         backgroundColor: const Color(0xFF47734E),
         title: const Text(
@@ -70,10 +70,10 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          // Page indicator dots
+          // page indicator dots
           _buildPageIndicator(),
           
-          // Swipeable cards - main focus
+          // swipeable cards
           Expanded(
             child: _buildSwipeableCards(),
           ),
@@ -220,7 +220,7 @@ class _HomePageState extends State<HomePage> {
             
             const SizedBox(height: 20),
             
-            // Title
+            // title
             Text(
               cardData['title'],
               style: const TextStyle(
@@ -233,7 +233,7 @@ class _HomePageState extends State<HomePage> {
             
             const SizedBox(height: 12),
             
-            // Description
+            // description
             Expanded(
               child: Text(
                 cardData['description'],
@@ -248,7 +248,7 @@ class _HomePageState extends State<HomePage> {
             
             const SizedBox(height: 20),
             
-            // Action button
+            // action button
             SizedBox(
               width: double.infinity,
               height: 50,
