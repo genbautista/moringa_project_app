@@ -1,3 +1,5 @@
-# moringa_project_app
+# Moringa Project App
 
-A new Flutter project.
+<h2>About Moringa Project</h2>
+
+<h3>How does the app work?</h3>
