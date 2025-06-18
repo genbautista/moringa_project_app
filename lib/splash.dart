@@ -26,7 +26,7 @@ class _SplashPageState extends State<SplashPage>
     _controller.forward();
 
     // auto navigate after 5 seconds to main_navigation instead of HomePage
-    Future.delayed(const Duration(seconds: 10), () {
+    Future.delayed(const Duration(seconds: 6), () {
       if (mounted) { // check if widget is still mounted
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const MainNavigation()),
