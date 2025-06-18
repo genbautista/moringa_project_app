@@ -27,7 +27,8 @@ class _SplashPageState extends State<SplashPage>
 
     // auto navigate after 5 seconds to main_navigation instead of HomePage
     Future.delayed(const Duration(seconds: 6), () {
-      if (mounted) { // check if widget is still mounted
+      if (mounted) {
+        // check if widget is still mounted
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const MainNavigation()),
         );
@@ -46,21 +47,21 @@ class _SplashPageState extends State<SplashPage>
     return Scaffold(
       backgroundColor: const Color(0xFFFAF7F0),
       body: Center(
-        child: Stack(
-          alignment: Alignment.topCenter,
-          children: [
-            FadeTransition(
-              opacity: _animation,
-              child: Image.asset(
+        child: FadeTransition(
+          opacity: _animation,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Logo image
+              Image.asset(
                 'assets/images/MP circle blk.png',
-                width: 500,
-                height: 500,
+                width: 250, // slightly smaller for balance
+                height: 250,
                 fit: BoxFit.contain,
               ),
-            ),
-            FadeTransition(
-              opacity: _animation,
-              child: const Text(
+              const SizedBox(height: 24), // spacing between image and title
+              // Main title
+              const Text(
                 'Welcome to\nMoringa Project',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -70,11 +71,22 @@ class _SplashPageState extends State<SplashPage>
                   color: Color(0xFF47734E),
                 ),
               ),
-            ),
-          ],
+              const SizedBox(height: 12), // spacing between titles
+              // Subheading
+              const Text(
+                'Your insider guide to wellness in Thailand',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: 'GlacialIndifference',
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFF5C8A63),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
