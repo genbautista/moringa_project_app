@@ -1,4 +1,4 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,16 +13,22 @@ class _HomePageState extends State<HomePage> {
 
   final List<Map<String, dynamic>> _moringaCards = [
     {
-      'title': 'What is Moringa',
-      'description': 'Learn more about how we use Moringa trees to cultivate our products.',
+      'title': 'What is Moringa Project',
+      'description': 'Learn about our mission and how we use Moringa trees to create sustainable products.',
       'image': 'assets/images/whatismoringa.webp',
       'action': 'Learn More'
     },
     {
-      'title': 'Moringa Benefits',
+      'title': 'What is Moringa Benefits',
       'description': 'Discover the amazing health and wellness benefits of Moringa.',
       'image': 'assets/images/benefits.webp',
       'action': 'Explore Benefits'
+    },
+    {
+      'title': 'Wellness Guide',
+      'description': 'Your complete guide to incorporating Moringa into your wellness routine.',
+      'image': 'assets/images/wellness.webp',
+      'action': 'View Guide'
     },
     {
       'title': 'Our Products',
@@ -74,49 +80,12 @@ class _HomePageState extends State<HomePage> {
           _buildPageIndicator(),
           
           // swipeable cards
-          Expanded(
+          SizedBox(
+            height: 500, // Fixed height for the entire swipeable card area
             child: _buildSwipeableCards(),
           ),
           
           const SizedBox(height: 20),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildLearnMoreSection() {
-    return Container(
-      margin: const EdgeInsets.all(20),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-      decoration: BoxDecoration(
-        color: const Color(0xFFE8E5DC),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        children: [
-          const Expanded(
-            child: Text(
-              'Moringa Oil - Learn More',
-              style: TextStyle(
-                color: Color(0xFF3A1A14),
-                fontSize: 18,
-                fontFamily: 'GlacialIndifference',
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: const Color(0xFF47734E),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: const Icon(
-              Icons.arrow_forward,
-              color: Color(0xFFFAF7F0),
-              size: 20,
-            ),
-          ),
         ],
       ),
     );
@@ -166,7 +135,8 @@ class _HomePageState extends State<HomePage> {
             return Transform.rotate(
               angle: value,
               child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 30),
+                margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 40),
+                height: 350, // Set fixed height for entire card
                 child: _buildMoringaCard(_moringaCards[index], index == _currentPage),
               ),
             );
@@ -183,7 +153,7 @@ class _HomePageState extends State<HomePage> {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16), // Reduced padding
         decoration: BoxDecoration(
           color: const Color(0xFFFAF7F0),
           borderRadius: BorderRadius.circular(20),
@@ -194,9 +164,9 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image area with better visual indication
+            // Image area
             Container(
-              height: 160,
+              height: 140, // Restored image height for better proportions
               width: double.infinity,
               decoration: BoxDecoration(
                 color: const Color(0xFFE8E5DC),
@@ -218,27 +188,27 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             
-            const SizedBox(height: 20),
+            const SizedBox(height: 16), // Reduced spacing
             
             // title
             Text(
               cardData['title'],
               style: const TextStyle(
-                fontSize: 24,
+                fontSize: 20, // Slightly reduced font size
                 fontWeight: FontWeight.bold,
                 fontFamily: 'GlacialIndifference',
                 color: Color(0xFF3A1A14),
               ),
             ),
             
-            const SizedBox(height: 12),
+            const SizedBox(height: 8), // Reduced spacing
             
             // description
             Expanded(
               child: Text(
                 cardData['description'],
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 14, // Slightly reduced font size
                   fontFamily: 'GlacialIndifference',
                   color: Color(0xFF3A1A14),
                   height: 1.4,
@@ -246,12 +216,12 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             
-            const SizedBox(height: 20),
+            const SizedBox(height: 16), // Reduced spacing
             
             // action button
             SizedBox(
               width: double.infinity,
-              height: 50,
+              height: 45, // Slightly reduced button height
               child: ElevatedButton(
                 onPressed: () {
                   debugPrint('${cardData['action']} pressed');
@@ -266,13 +236,14 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.add_shopping_cart, size: 20),
+                    const Icon(Icons.add_shopping_cart, size: 18), // Slightly smaller icon
                     const SizedBox(width: 8),
                     Text(
                       cardData['action'],
                       style: const TextStyle(
                         fontFamily: 'GlacialIndifference',
                         fontWeight: FontWeight.bold,
+                        fontSize: 14, // Slightly reduced font size
                       ),
                     ),
                   ],
