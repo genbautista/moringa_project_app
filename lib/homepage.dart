@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -38,6 +39,66 @@ class _HomePageState extends State<HomePage> {
     },
   ];
 
+  // Function to launch YouTube video with multiple fallback URLs
+  Future<void> _launchYouTubeVideo() async {
+    final List<String> urls = [
+      'https://www.youtube.com/watch?v=pWmcxgWQijA', // Full YouTube URL
+      'https://youtu.be/pWmcxgWQijA',                // Short YouTube URL
+      'https://m.youtube.com/watch?v=pWmcxgWQijA',   // Mobile YouTube URL
+    ];
+    
+    bool launched = false;
+    
+    for (String urlString in urls) {
+      try {
+        final Uri url = Uri.parse(urlString);
+        
+        if (await canLaunchUrl(url)) {
+          await launchUrl(
+            url,
+            mode: LaunchMode.externalApplication,
+          );
+          launched = true;
+          debugPrint('Successfully launched: $urlString');
+          break;
+        }
+      } catch (e) {
+        debugPrint('Failed to launch $urlString: $e');
+        continue;
+      }
+    }
+    
+    // If none of the URLs worked, try opening in browser mode
+    if (!launched) {
+      try {
+        final Uri fallbackUrl = Uri.parse('https://www.youtube.com/watch?v=pWmcxgWQijA');
+        await launchUrl(
+          fallbackUrl,
+          mode: LaunchMode.inAppBrowserView, // Opens in app browser
+        );
+        launched = true;
+        debugPrint('Opened in browser view');
+      } catch (e) {
+        debugPrint('Browser fallback failed: $e');
+      }
+    }
+    
+    // Show error message if nothing worked
+    if (!launched && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Could not open video. Please check your internet connection.'),
+          backgroundColor: const Color(0xFF47734E),
+          action: SnackBarAction(
+            label: 'Retry',
+            textColor: const Color(0xFFFAF7F0),
+            onPressed: _launchYouTubeVideo,
+          ),
+        ),
+      );
+    }
+  }
+
   @override
   void dispose() {
     _pageController.dispose();
@@ -76,12 +137,147 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
+          // Video thumbnail section
+          Container(
+            margin: const EdgeInsets.all(16),
+            height: 200,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.1),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Stack(
+              children: [
+                // YouTube thumbnail image
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    image: const DecorationImage(
+                      image: NetworkImage('https://img.youtube.com/vi/pWmcxgWQijA/maxresdefault.jpg'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                
+                // Dark overlay for better text visibility
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        Colors.black.withValues(alpha: 0.3),
+                        Colors.black.withValues(alpha: 0.6),
+                      ],
+                    ),
+                  ),
+                ),
+                
+                // Play button overlay
+                Center(
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withValues(alpha: 0.7),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: const Color(0xFFFAF7F0),
+                        width: 3,
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.play_arrow,
+                      size: 50,
+                      color: Color(0xFFFAF7F0),
+                    ),
+                  ),
+                ),
+                
+                // Bottom text overlay
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(12),
+                        bottomRight: Radius.circular(12),
+                      ),
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.black.withValues(alpha: 0.8),
+                        ],
+                      ),
+                    ),
+                    child: const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Learn About Moringa',
+                          style: TextStyle(
+                            color: Color(0xFFFAF7F0),
+                            fontSize: 18,
+                            fontFamily: 'GlacialIndifference',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.play_circle_outline,
+                              color: Color(0xFFFAF7F0),
+                              size: 16,
+                            ),
+                            SizedBox(width: 4),
+                            Text(
+                              'Tap to watch on YouTube',
+                              style: TextStyle(
+                                color: Color(0xFFFAF7F0),
+                                fontSize: 14,
+                                fontFamily: 'GlacialIndifference',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                
+                // Tap detector
+                Positioned.fill(
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(12),
+                      onTap: _launchYouTubeVideo,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          
           // page indicator dots
           _buildPageIndicator(),
           
           // swipeable cards
           SizedBox(
-            height: 500, // Fixed height for the entire swipeable card area
+            height: 450, // Adjusted height to accommodate video section
             child: _buildSwipeableCards(),
           ),
           
@@ -153,7 +349,7 @@ class _HomePageState extends State<HomePage> {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Container(
-        padding: const EdgeInsets.all(16), // Reduced padding
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: const Color(0xFFFAF7F0),
           borderRadius: BorderRadius.circular(20),
@@ -166,7 +362,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             // Image area
             Container(
-              height: 140, // Restored image height for better proportions
+              height: 140,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: const Color(0xFFE8E5DC),
@@ -188,27 +384,27 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             
-            const SizedBox(height: 16), // Reduced spacing
+            const SizedBox(height: 16),
             
             // title
             Text(
               cardData['title'],
               style: const TextStyle(
-                fontSize: 20, // Slightly reduced font size
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'GlacialIndifference',
                 color: Color(0xFF3A1A14),
               ),
             ),
             
-            const SizedBox(height: 8), // Reduced spacing
+            const SizedBox(height: 8),
             
             // description
             Expanded(
               child: Text(
                 cardData['description'],
                 style: const TextStyle(
-                  fontSize: 14, // Slightly reduced font size
+                  fontSize: 14,
                   fontFamily: 'GlacialIndifference',
                   color: Color(0xFF3A1A14),
                   height: 1.4,
@@ -216,12 +412,12 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             
-            const SizedBox(height: 16), // Reduced spacing
+            const SizedBox(height: 16),
             
             // action button
             SizedBox(
               width: double.infinity,
-              height: 45, // Slightly reduced button height
+              height: 45,
               child: ElevatedButton(
                 onPressed: () {
                   debugPrint('${cardData['action']} pressed');
@@ -236,14 +432,14 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.add_shopping_cart, size: 18), // Slightly smaller icon
+                    const Icon(Icons.add_shopping_cart, size: 18),
                     const SizedBox(width: 8),
                     Text(
                       cardData['action'],
                       style: const TextStyle(
                         fontFamily: 'GlacialIndifference',
                         fontWeight: FontWeight.bold,
-                        fontSize: 14, // Slightly reduced font size
+                        fontSize: 14,
                       ),
                     ),
                   ],
