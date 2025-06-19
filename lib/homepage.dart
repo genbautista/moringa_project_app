@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:moringa_project_app/explorebenefits.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'learnmore.dart';
+import 'viewguide.dart';
+import 'explorebenefits.dart';
+import 'shopnow.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,6 +24,7 @@ class _HomePageState extends State<HomePage> {
           'Learn about our mission and how we use Moringa trees to create sustainable products.',
       'image': 'assets/images/whatismoringa.webp',
       'action': 'Learn More',
+      'route': LearnMore(),
     },
     {
       'title': 'What is Moringa Benefits',
@@ -26,6 +32,7 @@ class _HomePageState extends State<HomePage> {
           'Discover the amazing health and wellness benefits of Moringa.',
       'image': 'assets/images/benefits.webp',
       'action': 'Explore Benefits',
+      'route': ExploreBenefits(),
     },
     {
       'title': 'Wellness Guide',
@@ -33,6 +40,7 @@ class _HomePageState extends State<HomePage> {
           'Your complete guide to incorporating Moringa into your wellness routine.',
       'image': 'assets/images/wellness.webp',
       'action': 'View Guide',
+      'route': ViewGuide(),
     },
     {
       'title': 'Our Products',
@@ -40,10 +48,11 @@ class _HomePageState extends State<HomePage> {
           'Explore our range of premium Moringa-based skincare products.',
       'image': 'assets/images/productimage.webp',
       'action': 'Shop Now',
+      'route': ShopNow(),
     },
   ];
 
-  // Placeholder data for the new widget grid
+  // placeholder data for the new widget grid
   final List<Map<String, dynamic>> _placeholderWidgets = [
     {'title': 'Widget 1', 'icon': Icons.eco},
     {'title': 'Widget 2', 'icon': Icons.local_florist},
@@ -52,7 +61,7 @@ class _HomePageState extends State<HomePage> {
     {'title': 'Widget 5', 'icon': Icons.healing},
   ];
 
-  // Function to launch YouTube video with multiple fallback URLs
+  // function to launch YouTube video with multiple fallback URLs
   Future<void> _launchYouTubeVideo() async {
     final List<String> urls = [
       'https://www.youtube.com/watch?v=pWmcxgWQijA', // Full YouTube URL
@@ -78,16 +87,13 @@ class _HomePageState extends State<HomePage> {
       }
     }
 
-    // If none of the URLs worked, try opening in browser mode
+    // if none of the URLs worked, try opening in browser mode
     if (!launched) {
       try {
         final Uri fallbackUrl = Uri.parse(
           'https://www.youtube.com/watch?v=pWmcxgWQijA',
         );
-        await launchUrl(
-          fallbackUrl,
-          mode: LaunchMode.inAppBrowserView, // Opens in app browser
-        );
+        await launchUrl(fallbackUrl, mode: LaunchMode.inAppBrowserView);
         launched = true;
         debugPrint('Opened in browser view');
       } catch (e) {
@@ -95,7 +101,7 @@ class _HomePageState extends State<HomePage> {
       }
     }
 
-    // Show error message if nothing worked
+    // show error message if nothing worked
     if (!launched && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -153,7 +159,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Video thumbnail section
+            // video thumbnail section
             Container(
               margin: const EdgeInsets.all(16),
               height: 200,
@@ -169,7 +175,7 @@ class _HomePageState extends State<HomePage> {
               ),
               child: Stack(
                 children: [
-                  // YouTube thumbnail image
+                  // youTube thumbnail image
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
@@ -182,7 +188,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 
-                  // Dark overlay for better text visibility
+                  // dark overlay for better text visibility
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
@@ -198,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 
-                  // Play button overlay
+                  // play button overlay
                   Center(
                     child: Container(
                       padding: const EdgeInsets.all(20),
@@ -218,7 +224,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 
-                  // Bottom text overlay
+                  // bottom text overlay
                   Positioned(
                     bottom: 0,
                     left: 0,
@@ -276,7 +282,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
 
-                  // Tap detector
+                  // tap detector
                   Positioned.fill(
                     child: Material(
                       color: Colors.transparent,
@@ -296,7 +302,7 @@ class _HomePageState extends State<HomePage> {
             // swipeable cards
             SizedBox(height: 420, child: _buildSwipeableCards()),
 
-            // New Horizontal Widget Section
+            // new Horizontal Widget Section
             Container(
               margin: const EdgeInsets.all(16),
               child: Column(
@@ -420,7 +426,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image area
+            // image area
             Container(
               height: 120,
               width: double.infinity,
@@ -471,7 +477,10 @@ class _HomePageState extends State<HomePage> {
               height: 45,
               child: ElevatedButton(
                 onPressed: () {
-                  debugPrint('${cardData['action']} pressed');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => cardData['route']),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF47734E),
