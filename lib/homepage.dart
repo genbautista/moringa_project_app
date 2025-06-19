@@ -15,27 +15,31 @@ class _HomePageState extends State<HomePage> {
   final List<Map<String, dynamic>> _moringaCards = [
     {
       'title': 'What is Moringa Project',
-      'description': 'Learn about our mission and how we use Moringa trees to create sustainable products.',
+      'description':
+          'Learn about our mission and how we use Moringa trees to create sustainable products.',
       'image': 'assets/images/whatismoringa.webp',
-      'action': 'Learn More'
+      'action': 'Learn More',
     },
     {
       'title': 'What is Moringa Benefits',
-      'description': 'Discover the amazing health and wellness benefits of Moringa.',
+      'description':
+          'Discover the amazing health and wellness benefits of Moringa.',
       'image': 'assets/images/benefits.webp',
-      'action': 'Explore Benefits'
+      'action': 'Explore Benefits',
     },
     {
       'title': 'Wellness Guide',
-      'description': 'Your complete guide to incorporating Moringa into your wellness routine.',
+      'description':
+          'Your complete guide to incorporating Moringa into your wellness routine.',
       'image': 'assets/images/wellness.webp',
-      'action': 'View Guide'
+      'action': 'View Guide',
     },
     {
       'title': 'Our Products',
-      'description': 'Explore our range of premium Moringa-based skincare products.',
+      'description':
+          'Explore our range of premium Moringa-based skincare products.',
       'image': 'assets/images/productimage.webp',
-      'action': 'Shop Now'
+      'action': 'Shop Now',
     },
   ];
 
@@ -52,21 +56,18 @@ class _HomePageState extends State<HomePage> {
   Future<void> _launchYouTubeVideo() async {
     final List<String> urls = [
       'https://www.youtube.com/watch?v=pWmcxgWQijA', // Full YouTube URL
-      'https://youtu.be/pWmcxgWQijA',                // Short YouTube URL
-      'https://m.youtube.com/watch?v=pWmcxgWQijA',   // Mobile YouTube URL
+      'https://youtu.be/pWmcxgWQijA', // Short YouTube URL
+      'https://m.youtube.com/watch?v=pWmcxgWQijA', // Mobile YouTube URL
     ];
-    
+
     bool launched = false;
-    
+
     for (String urlString in urls) {
       try {
         final Uri url = Uri.parse(urlString);
-        
+
         if (await canLaunchUrl(url)) {
-          await launchUrl(
-            url,
-            mode: LaunchMode.externalApplication,
-          );
+          await launchUrl(url, mode: LaunchMode.externalApplication);
           launched = true;
           debugPrint('Successfully launched: $urlString');
           break;
@@ -76,11 +77,13 @@ class _HomePageState extends State<HomePage> {
         continue;
       }
     }
-    
+
     // If none of the URLs worked, try opening in browser mode
     if (!launched) {
       try {
-        final Uri fallbackUrl = Uri.parse('https://www.youtube.com/watch?v=pWmcxgWQijA');
+        final Uri fallbackUrl = Uri.parse(
+          'https://www.youtube.com/watch?v=pWmcxgWQijA',
+        );
         await launchUrl(
           fallbackUrl,
           mode: LaunchMode.inAppBrowserView, // Opens in app browser
@@ -91,12 +94,14 @@ class _HomePageState extends State<HomePage> {
         debugPrint('Browser fallback failed: $e');
       }
     }
-    
+
     // Show error message if nothing worked
     if (!launched && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Could not open video. Please check your internet connection.'),
+          content: const Text(
+            'Could not open video. Please check your internet connection.',
+          ),
           backgroundColor: const Color(0xFF47734E),
           action: SnackBarAction(
             label: 'Retry',
@@ -117,7 +122,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAF7F0), 
+      backgroundColor: const Color(0xFFFAF7F0),
       appBar: AppBar(
         backgroundColor: const Color(0xFF47734E),
         title: const Text(
@@ -169,12 +174,14 @@ class _HomePageState extends State<HomePage> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       image: const DecorationImage(
-                        image: NetworkImage('https://img.youtube.com/vi/pWmcxgWQijA/maxresdefault.jpg'),
+                        image: NetworkImage(
+                          'https://img.youtube.com/vi/pWmcxgWQijA/maxresdefault.jpg',
+                        ),
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                  
+
                   // Dark overlay for better text visibility
                   Container(
                     decoration: BoxDecoration(
@@ -190,7 +197,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  
+
                   // Play button overlay
                   Center(
                     child: Container(
@@ -210,7 +217,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  
+
                   // Bottom text overlay
                   Positioned(
                     bottom: 0,
@@ -268,7 +275,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  
+
                   // Tap detector
                   Positioned.fill(
                     child: Material(
@@ -282,16 +289,13 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            
+
             // page indicator dots
             _buildPageIndicator(),
-            
+
             // swipeable cards
-            SizedBox(
-              height: 450,
-              child: _buildSwipeableCards(),
-            ),
-            
+            SizedBox(height: 420, child: _buildSwipeableCards()),
+
             // New Horizontal Widget Section
             Container(
               margin: const EdgeInsets.all(16),
@@ -299,7 +303,7 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Quick Access',
+                    'Our Best-Selling Must Haves',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -307,18 +311,19 @@ class _HomePageState extends State<HomePage> {
                       color: Color(0xFF47734E),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 25),
                   SizedBox(
-                    height: 100,
+                    height: 200,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: _placeholderWidgets.length,
                       itemBuilder: (context, index) {
                         final widget = _placeholderWidgets[index];
                         return Container(
-                          width: 85,
+                          width: 200,
                           margin: EdgeInsets.only(
-                            right: index < _placeholderWidgets.length - 1 ? 12 : 0,
+                            right:
+                                index < _placeholderWidgets.length - 1 ? 12 : 0,
                           ),
                           child: _buildPlaceholderWidget(widget),
                         );
@@ -328,7 +333,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 20),
           ],
         ),
@@ -348,9 +353,10 @@ class _HomePageState extends State<HomePage> {
             height: 8,
             margin: const EdgeInsets.symmetric(horizontal: 4),
             decoration: BoxDecoration(
-              color: _currentPage == index 
-                  ? const Color(0xFF47734E) 
-                  : const Color(0xFFE8E5DC),
+              color:
+                  _currentPage == index
+                      ? const Color(0xFF47734E)
+                      : const Color(0xFFE8E5DC),
               borderRadius: BorderRadius.circular(4),
             ),
           ),
@@ -380,9 +386,15 @@ class _HomePageState extends State<HomePage> {
             return Transform.rotate(
               angle: value,
               child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 40),
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 40,
+                ),
                 height: 350,
-                child: _buildMoringaCard(_moringaCards[index], index == _currentPage),
+                child: _buildMoringaCard(
+                  _moringaCards[index],
+                  index == _currentPage,
+                ),
               ),
             );
           },
@@ -394,24 +406,23 @@ class _HomePageState extends State<HomePage> {
   Widget _buildMoringaCard(Map<String, dynamic> cardData, bool isActive) {
     return Card(
       elevation: isActive ? 12 : 6,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: const Color(0xFFFAF7F0),
           borderRadius: BorderRadius.circular(20),
-          border: isActive 
-              ? Border.all(color: const Color(0xFF47734E), width: 2)
-              : null,
+          border:
+              isActive
+                  ? Border.all(color: const Color(0xFF47734E), width: 2)
+                  : null,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Image area
             Container(
-              height: 140,
+              height: 120,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: const Color(0xFFE8E5DC),
@@ -419,22 +430,13 @@ class _HomePageState extends State<HomePage> {
                 image: DecorationImage(
                   image: AssetImage(cardData['image']),
                   fit: BoxFit.cover,
-                  onError: (exception, stackTrace) {
-                    // Fallback if image doesn't exist
-                  },
-                ),
-              ),
-              child: const Center(
-                child: Icon(
-                  Icons.eco,
-                  size: 60,
-                  color: Color(0xFF47734E),
+                  onError: (exception, stackTrace) {},
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // title
             Text(
               cardData['title'],
@@ -445,9 +447,9 @@ class _HomePageState extends State<HomePage> {
                 color: Color(0xFF3A1A14),
               ),
             ),
-            
+
             const SizedBox(height: 8),
-            
+
             // description
             Expanded(
               child: Text(
@@ -460,9 +462,9 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // action button
             SizedBox(
               width: double.infinity,
