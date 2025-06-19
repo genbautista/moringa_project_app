@@ -6,9 +6,9 @@ class ShopPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final products = [
-      {'name': 'none', 'none': '\$00'},
-      {'name': 'none', 'none': '\$00'},
-      {'name': 'none', 'none': '\$00'},
+      {'name': 'Moringa Hair Oil', 'price': '\$25'},
+      {'name': 'Moringa Face Cream', 'price': '\$30'},
+      {'name': 'Moringa Body Lotion', 'price': '\$20'},
     ];
 
     return Scaffold(
@@ -27,7 +27,9 @@ class ShopPage extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         itemCount: products.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, mainAxisSpacing: 16, crossAxisSpacing: 16,
+          crossAxisCount: 2, 
+          mainAxisSpacing: 16, 
+          crossAxisSpacing: 16,
         ),
         itemBuilder: (context, index) {
           final product = products[index];
@@ -42,16 +44,15 @@ class ShopPage extends StatelessWidget {
               children: [
                 const Icon(Icons.spa, size: 40, color: Color(0xFF47734E)),
                 const SizedBox(height: 8),
-                Text(product['name']!,
-                    style: const TextStyle(
-                      fontFamily: 'GlacialIndifference',
-                      fontWeight: FontWeight.bold,
-                    )),
-                Text(product['price']!,
-                    style: const TextStyle(
-                      fontFamily: 'GlacialIndifference',
-                      color: Colors.grey,
-                    )),
+                Text(
+                  product['name']!,
+                  style: const TextStyle(
+                    fontFamily: 'GlacialIndifference',
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 4),
               ],
             ),
           );
