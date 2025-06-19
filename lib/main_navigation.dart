@@ -32,7 +32,7 @@ class _MainNavigationState extends State<MainNavigation> {
         onTap: (index) => setState(() => _currentIndex = index),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Learn'),
+          BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Moringa Project'),
           BottomNavigationBarItem(icon: Icon(Icons.shopping_bag), label: 'Shop'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Account'),
         ],
