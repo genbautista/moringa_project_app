@@ -16,7 +16,7 @@ class LearnPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFF47734E),
         title: const Text(
-          'Learn About Moringa',
+          'Moringa Project: Guide to Wellness',
           style: TextStyle(
             fontFamily: 'GlacialIndifference',
             color: Color(0xFFFAF7F0),
