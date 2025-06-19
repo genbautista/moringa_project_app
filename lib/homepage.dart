@@ -39,6 +39,15 @@ class _HomePageState extends State<HomePage> {
     },
   ];
 
+  // Placeholder data for the new widget grid
+  final List<Map<String, dynamic>> _placeholderWidgets = [
+    {'title': 'Widget 1', 'icon': Icons.eco},
+    {'title': 'Widget 2', 'icon': Icons.local_florist},
+    {'title': 'Widget 3', 'icon': Icons.spa},
+    {'title': 'Widget 4', 'icon': Icons.nature},
+    {'title': 'Widget 5', 'icon': Icons.healing},
+  ];
+
   // Function to launch YouTube video with multiple fallback URLs
   Future<void> _launchYouTubeVideo() async {
     final List<String> urls = [
@@ -135,154 +144,194 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          // Video thumbnail section
-          Container(
-            margin: const EdgeInsets.all(16),
-            height: 200,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.1),
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Stack(
-              children: [
-                // YouTube thumbnail image
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    image: const DecorationImage(
-                      image: NetworkImage('https://img.youtube.com/vi/pWmcxgWQijA/maxresdefault.jpg'),
-                      fit: BoxFit.cover,
-                    ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Video thumbnail section
+            Container(
+              margin: const EdgeInsets.all(16),
+              height: 200,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
                   ),
-                ),
-                
-                // Dark overlay for better text visibility
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.transparent,
-                        Colors.black.withValues(alpha: 0.3),
-                        Colors.black.withValues(alpha: 0.6),
-                      ],
-                    ),
-                  ),
-                ),
-                
-                // Play button overlay
-                Center(
-                  child: Container(
-                    padding: const EdgeInsets.all(20),
+                ],
+              ),
+              child: Stack(
+                children: [
+                  // YouTube thumbnail image
+                  Container(
                     decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.7),
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: const Color(0xFFFAF7F0),
-                        width: 3,
+                      borderRadius: BorderRadius.circular(12),
+                      image: const DecorationImage(
+                        image: NetworkImage('https://img.youtube.com/vi/pWmcxgWQijA/maxresdefault.jpg'),
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    child: const Icon(
-                      Icons.play_arrow,
-                      size: 50,
-                      color: Color(0xFFFAF7F0),
-                    ),
                   ),
-                ),
-                
-                // Bottom text overlay
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
+                  
+                  // Dark overlay for better text visibility
+                  Container(
                     decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(12),
-                        bottomRight: Radius.circular(12),
-                      ),
+                      borderRadius: BorderRadius.circular(12),
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
                           Colors.transparent,
-                          Colors.black.withValues(alpha: 0.8),
+                          Colors.black.withValues(alpha: 0.3),
+                          Colors.black.withValues(alpha: 0.6),
                         ],
                       ),
                     ),
-                    child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'Learn About Moringa',
-                          style: TextStyle(
-                            color: Color(0xFFFAF7F0),
-                            fontSize: 18,
-                            fontFamily: 'GlacialIndifference',
-                            fontWeight: FontWeight.bold,
-                          ),
+                  ),
+                  
+                  // Play button overlay
+                  Center(
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.7),
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: const Color(0xFFFAF7F0),
+                          width: 3,
                         ),
-                        SizedBox(height: 4),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.play_circle_outline,
-                              color: Color(0xFFFAF7F0),
-                              size: 16,
-                            ),
-                            SizedBox(width: 4),
-                            Text(
-                              'Tap to watch on YouTube',
-                              style: TextStyle(
-                                color: Color(0xFFFAF7F0),
-                                fontSize: 14,
-                                fontFamily: 'GlacialIndifference',
-                              ),
-                            ),
+                      ),
+                      child: const Icon(
+                        Icons.play_arrow,
+                        size: 20,
+                        color: Color(0xFFFAF7F0),
+                      ),
+                    ),
+                  ),
+                  
+                  // Bottom text overlay
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(12),
+                          bottomRight: Radius.circular(12),
+                        ),
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.transparent,
+                            Colors.black.withValues(alpha: 0.8),
                           ],
                         ),
-                      ],
+                      ),
+                      child: const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Moringa: Farm To Face',
+                            style: TextStyle(
+                              color: Color(0xFFFAF7F0),
+                              fontSize: 18,
+                              fontFamily: 'GlacialIndifference',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.play_circle_outline,
+                                color: Color(0xFFFAF7F0),
+                                size: 16,
+                              ),
+                              SizedBox(width: 4),
+                              Text(
+                                'Tap to watch on YouTube',
+                                style: TextStyle(
+                                  color: Color(0xFFFAF7F0),
+                                  fontSize: 14,
+                                  fontFamily: 'GlacialIndifference',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                
-                // Tap detector
-                Positioned.fill(
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(12),
-                      onTap: _launchYouTubeVideo,
+                  
+                  // Tap detector
+                  Positioned.fill(
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(12),
+                        onTap: _launchYouTubeVideo,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          
-          // page indicator dots
-          _buildPageIndicator(),
-          
-          // swipeable cards
-          SizedBox(
-            height: 450, // Adjusted height to accommodate video section
-            child: _buildSwipeableCards(),
-          ),
-          
-          const SizedBox(height: 20),
-        ],
+            
+            // page indicator dots
+            _buildPageIndicator(),
+            
+            // swipeable cards
+            SizedBox(
+              height: 450,
+              child: _buildSwipeableCards(),
+            ),
+            
+            // New Horizontal Widget Section
+            Container(
+              margin: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Quick Access',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'GlacialIndifference',
+                      color: Color(0xFF47734E),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    height: 100,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _placeholderWidgets.length,
+                      itemBuilder: (context, index) {
+                        final widget = _placeholderWidgets[index];
+                        return Container(
+                          width: 85,
+                          margin: EdgeInsets.only(
+                            right: index < _placeholderWidgets.length - 1 ? 12 : 0,
+                          ),
+                          child: _buildPlaceholderWidget(widget),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            
+            const SizedBox(height: 20),
+          ],
+        ),
       ),
     );
   }
@@ -332,7 +381,7 @@ class _HomePageState extends State<HomePage> {
               angle: value,
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 40),
-                height: 350, // Set fixed height for entire card
+                height: 350,
                 child: _buildMoringaCard(_moringaCards[index], index == _currentPage),
               ),
             );
@@ -447,6 +496,52 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPlaceholderWidget(Map<String, dynamic> widgetData) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFFE8E5DC),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: const Color(0xFF47734E).withValues(alpha: 0.3),
+          width: 1,
+        ),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: () {
+            debugPrint('${widgetData['title']} tapped');
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  widgetData['icon'],
+                  size: 32,
+                  color: const Color(0xFF47734E),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  widgetData['title'],
+                  style: const TextStyle(
+                    fontFamily: 'GlacialIndifference',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                    color: Color(0xFF3A1A14),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
