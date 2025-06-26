@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:moringa_project_app/explorebenefits.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'learnmore.dart';
 import 'viewguide.dart';
@@ -302,7 +301,7 @@ class _HomePageState extends State<HomePage> {
             // swipeable cards
             SizedBox(height: 420, child: _buildSwipeableCards()),
 
-            // new Horizontal Widget Section
+            // new horizontal widget section
             Container(
               margin: const EdgeInsets.all(16),
               child: Column(
