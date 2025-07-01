@@ -338,6 +338,42 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+            Container(
+              margin: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Blog & Articles',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'GlacialIndifference',
+                      color: Color(0xFF47734E),
+                    ),
+                  ),
+                  const SizedBox(height: 25),
+                  SizedBox(
+                    height: 200,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _placeholderWidgets.length,
+                      itemBuilder: (context, index) {
+                        final widget = _placeholderWidgets[index];
+                        return Container(
+                          width: 200,
+                          margin: EdgeInsets.only(
+                            right:
+                                index < _placeholderWidgets.length - 1 ? 12 : 0,
+                          ),
+                          child: _buildPlaceholderWidget(widget),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
             const SizedBox(height: 20),
           ],
