@@ -166,6 +166,7 @@ class _SpaExperiencePageState extends State<SpaExperiencePage> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
+                    // ignore: deprecated_member_use
                     const Color(0xFF8BC34A).withOpacity(0.1),
                     const Color(0xFFFAF7F0),
                   ],
@@ -176,6 +177,7 @@ class _SpaExperiencePageState extends State<SpaExperiencePage> {
                   Container(
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
+                      // ignore: deprecated_member_use
                       color: const Color(0xFF8BC34A).withOpacity(0.1),
                       shape: BoxShape.circle,
                     ),
@@ -245,6 +247,7 @@ class _SpaExperiencePageState extends State<SpaExperiencePage> {
                 color: const Color(0xFFE8E5DC),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
+                  // ignore: deprecated_member_use
                   color: const Color(0xFF47734E).withOpacity(0.3),
                   width: 1,
                 ),
@@ -257,6 +260,7 @@ class _SpaExperiencePageState extends State<SpaExperiencePage> {
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
+                          // ignore: deprecated_member_use
                           color: const Color(0xFF47734E).withOpacity(0.1),
                           shape: BoxShape.circle,
                         ),
@@ -313,6 +317,7 @@ class _SpaExperiencePageState extends State<SpaExperiencePage> {
                       color: const Color(0xFFFAF7F0),
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
+                        // ignore: deprecated_member_use
                         color: const Color(0xFF47734E).withOpacity(0.3),
                         width: 1,
                       ),
@@ -415,11 +420,13 @@ class _SpaExperiencePageState extends State<SpaExperiencePage> {
         color: const Color(0xFFFAF7F0),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
+          // ignore: deprecated_member_use
           color: (location['color'] as Color).withOpacity(0.3),
           width: 2,
         ),
         boxShadow: [
           BoxShadow(
+            // ignore: deprecated_member_use
             color: Colors.black.withOpacity(0.05),
             blurRadius: 8,
             offset: const Offset(0, 2),
@@ -434,6 +441,7 @@ class _SpaExperiencePageState extends State<SpaExperiencePage> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
+                  // ignore: deprecated_member_use
                   color: (location['color'] as Color).withOpacity(0.1),
                   shape: BoxShape.circle,
                 ),
@@ -480,6 +488,7 @@ class _SpaExperiencePageState extends State<SpaExperiencePage> {
               return Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
+                  // ignore: deprecated_member_use
                   color: (location['color'] as Color).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
