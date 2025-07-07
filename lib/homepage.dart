@@ -845,7 +845,7 @@ class _HomePageState extends State<HomePage> {
                   child: Stack(
                     children: [
                       // Image widget that handles both asset and network images
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         height: double.infinity,
                         child: _buildBlogImage(blogData['imageUrl']),
