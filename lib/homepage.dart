@@ -3,8 +3,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'learnmore.dart';
 import 'viewguide.dart';
 import 'explorebenefits.dart';
-import 'shopnow.dart';
-import 'webview_article.dart'; 
+import 'shop.dart';
+import 'webview_article.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -48,33 +48,24 @@ class _HomePageState extends State<HomePage> {
           'Explore our range of premium Moringa-based skincare products.',
       'image': 'assets/images/productimage.webp',
       'action': 'Shop Now',
-      'route': ShopNow(),
+      'route': ShopPage(),
     },
   ];
 
   // placeholder data for the new widget grid
   final List<Map<String, dynamic>> _placeholderWidgets = [
-  {
-    'title': 'Moringa Facial Oil',
-    'url': 'assets/images/moringa_facial_oil.webp'
-  },
-  {
-    'title': 'Clay Face Mask',
-    'url': 'assets/images/moringa_clay_face_mask.webp'
-  },
-  {
-    'title': 'Moringa Body Oil',
-    'url': 'assets/images/moringa_body_oil.webp'
-  },
-  {
-    'title': 'Moringa Hair Oil',
-    'url': 'assets/images/moringa_hair_oil.webp'
-  },
-  {
-    'title': 'Pampering Set',
-    'url': 'assets/images/pampering_set.webp'
-  },
-];
+    {
+      'title': 'Moringa Facial Oil',
+      'url': 'assets/images/moringa_facial_oil.webp',
+    },
+    {
+      'title': 'Clay Face Mask',
+      'url': 'assets/images/moringa_clay_face_mask.webp',
+    },
+    {'title': 'Moringa Body Oil', 'url': 'assets/images/moringa_body_oil.webp'},
+    {'title': 'Moringa Hair Oil', 'url': 'assets/images/moringa_hair_oil.webp'},
+    {'title': 'Pampering Set', 'url': 'assets/images/pampering_set.webp'},
+  ];
 
   // REAL Moringa Love Blog articles from your website (LATEST TO OLDEST)
   final List<Map<String, dynamic>> _blogWidgets = [
@@ -82,56 +73,70 @@ class _HomePageState extends State<HomePage> {
       'title': '5 Things Nobody Tells You About Your Skin When You Travel',
       'subtitle': 'Travel & Wellness',
       'icon': Icons.flight_takeoff,
-      'url': 'https://www.moringaprojectthailand.com/blogs/news/5-things-nobody-tells-you-about-your-skin-when-you-travel',
-      'description': 'Travel is great for your mind, but not always for your skin. Long flights, pollution, unfamiliar water, and changing weather can all throw your skin off balance.',
+      'url':
+          'https://www.moringaprojectthailand.com/blogs/news/5-things-nobody-tells-you-about-your-skin-when-you-travel',
+      'description':
+          'Travel is great for your mind, but not always for your skin. Long flights, pollution, unfamiliar water, and changing weather can all throw your skin off balance.',
       'imageUrl': 'assets/images/5_things.webp',
     },
     {
       'title': 'Wellness on the Go: How to Stay Healthy Whilst Traveling',
       'subtitle': 'Travel & Wellness',
       'icon': Icons.flight_takeoff,
-      'url': 'https://www.moringaprojectthailand.com/en-us/blogs/news/wellness-on-the-go-how-to-stay-healthy-whilst-traveling',
-      'description': 'Travel can be rewarding, but it often disrupts our routines. Learn how to maintain balance while traveling.',
+      'url':
+          'https://www.moringaprojectthailand.com/en-us/blogs/news/wellness-on-the-go-how-to-stay-healthy-whilst-traveling',
+      'description':
+          'Travel can be rewarding, but it often disrupts our routines. Learn how to maintain balance while traveling.',
       'imageUrl': 'assets/images/wellness_on_the_go.webp',
     },
     {
       'title': 'Moringa Oil for Eczema Relief',
       'subtitle': 'Skin Health',
       'icon': Icons.healing,
-      'url': 'https://www.moringaprojectthailand.com/en-us/blogs/news/moringa-oil-for-eczema-relief',
-      'description': 'Eczema can feel like a never-ending cycle. Discover how moringa oil can provide natural relief.',
+      'url':
+          'https://www.moringaprojectthailand.com/en-us/blogs/news/moringa-oil-for-eczema-relief',
+      'description':
+          'Eczema can feel like a never-ending cycle. Discover how moringa oil can provide natural relief.',
       'imageUrl': 'assets/images/moringa_oil_eczema.webp',
     },
     {
       'title': 'Wellness Around the World: Global Rituals That Inspire Us',
       'subtitle': 'Global Wellness',
       'icon': Icons.public,
-      'url': 'https://www.moringaprojectthailand.com/en-us/blogs/news/wellness-around-the-world-global-rituals-that-inspire-us',
-      'description': 'Wellness is a language spoken through culture, tradition, and everyday ritual across the world.',
+      'url':
+          'https://www.moringaprojectthailand.com/en-us/blogs/news/wellness-around-the-world-global-rituals-that-inspire-us',
+      'description':
+          'Wellness is a language spoken through culture, tradition, and everyday ritual across the world.',
       'imageUrl': 'assets/images/global_rituals.webp',
     },
     {
       'title': 'Moringa Moments: Inside the Wellness Circle with Fah Chanettee',
       'subtitle': 'Skin Health',
       'icon': Icons.content_cut,
-      'url': 'https://www.moringaprojectthailand.com/blogs/news/moringa-moments-inside-the-wellness-circle-with-fah-chanettee',
-      'description': 'Hear from one of our Moringa community of practitioner,  Fah Chanettee— a physiotherapist whose journey has grown into something far beyond physical rehabilitation. ',
+      'url':
+          'https://www.moringaprojectthailand.com/blogs/news/moringa-moments-inside-the-wellness-circle-with-fah-chanettee',
+      'description':
+          'Hear from one of our Moringa community of practitioner,  Fah Chanettee— a physiotherapist whose journey has grown into something far beyond physical rehabilitation. ',
       'imageUrl': 'assets/images/moringa_moments.webp',
     },
     {
       'title': 'A Beginner\'s Guide to Moringa Project Products',
       'subtitle': 'Skincare Guide',
       'icon': Icons.spa,
-      'url': 'https://www.moringaprojectthailand.com/en-us/blogs/news/a-beginner-s-guide-to-moringa-project-products',
-      'description': 'New to Moringa Project? Explore our beginner\'s guide to natural skincare powered by moringa.',
+      'url':
+          'https://www.moringaprojectthailand.com/en-us/blogs/news/a-beginner-s-guide-to-moringa-project-products',
+      'description':
+          'New to Moringa Project? Explore our beginner\'s guide to natural skincare powered by moringa.',
       'imageUrl': 'assets/images/beginners_guide.webp',
     },
     {
       'title': 'The Mood-Lifting Benefits of Moringa',
       'subtitle': 'Body Care',
       'icon': Icons.self_improvement,
-      'url': 'https://www.moringaprojectthailand.com/blogs/news/the-mood-lifting-benefits-of-moringa',
-      'description': 'At Moringa Project, we talk a lot about natural skincare and building mindful rituals because what we really care about is how you feel, not just how you look.',
+      'url':
+          'https://www.moringaprojectthailand.com/blogs/news/the-mood-lifting-benefits-of-moringa',
+      'description':
+          'At Moringa Project, we talk a lot about natural skincare and building mindful rituals because what we really care about is how you feel, not just how you look.',
       'imageUrl': 'assets/images/mood_lifting.webp',
     },
   ];
@@ -141,11 +146,12 @@ class _HomePageState extends State<HomePage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => WebViewArticle(
-          title: article['title'],
-          url: article['url'],
-          category: article['subtitle'],
-        ),
+        builder:
+            (context) => WebViewArticle(
+              title: article['title'],
+              url: article['url'],
+              category: article['subtitle'],
+            ),
       ),
     );
   }
@@ -251,9 +257,11 @@ class _HomePageState extends State<HomePage> {
             color: const Color(0xFFE8E5DC),
             child: Center(
               child: CircularProgressIndicator(
-                value: loadingProgress.expectedTotalBytes != null
-                    ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-                    : null,
+                value:
+                    loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes!
+                        : null,
                 color: const Color(0xFF47734E),
               ),
             ),
@@ -720,87 +728,89 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildPlaceholderWidget(Map<String, dynamic> widgetData) {
-  return Container(
-    decoration: BoxDecoration(
-      color: const Color(0xFFE8E5DC),
-      borderRadius: BorderRadius.circular(12),
-      border: Border.all(
-        color: const Color(0xFF47734E).withValues(alpha: 0.3),
-        width: 1,
-      ),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withValues(alpha: 0.08),
-          blurRadius: 8,
-          offset: const Offset(0, 2),
-        ),
-      ],
-    ),
-    child: Material(
-      color: Colors.transparent,
-      child: InkWell(
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFFE8E5DC),
         borderRadius: BorderRadius.circular(12),
-        onTap: () {
-          debugPrint('${widgetData['title']} tapped');
-        },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Image section
-            Expanded(
-              flex: 3,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(12),
-                    topRight: Radius.circular(12),
-                  ),
-                  image: DecorationImage(
-                    image: AssetImage(widgetData['url']),
-                    fit: BoxFit.cover,
-                    onError: (exception, stackTrace) {
-                      // Handle image loading error
-                      debugPrint('Failed to load image: ${widgetData['url']}');
-                    },
-                  ),
-                ),
-              ),
-            ),
-            
-            // Title section
-            Expanded(
-              flex: 1,
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                decoration: const BoxDecoration(
-                  color: Color(0xFFFAF7F0),
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(12),
-                    bottomRight: Radius.circular(12),
-                  ),
-                ),
-                child: Center(
-                  child: Text(
-                    widgetData['title'],
-                    style: const TextStyle(
-                      fontFamily: 'GlacialIndifference',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                      color: Color(0xFF3A1A14),
+        border: Border.all(
+          color: const Color(0xFF47734E).withValues(alpha: 0.3),
+          width: 1,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.08),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: () {
+            debugPrint('${widgetData['title']} tapped');
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Image section
+              Expanded(
+                flex: 3,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      topRight: Radius.circular(12),
                     ),
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                    image: DecorationImage(
+                      image: AssetImage(widgetData['url']),
+                      fit: BoxFit.cover,
+                      onError: (exception, stackTrace) {
+                        // Handle image loading error
+                        debugPrint(
+                          'Failed to load image: ${widgetData['url']}',
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+
+              // Title section
+              Expanded(
+                flex: 1,
+                child: Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: const BoxDecoration(
+                    color: Color(0xFFFAF7F0),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(12),
+                      bottomRight: Radius.circular(12),
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      widgetData['title'],
+                      style: const TextStyle(
+                        fontFamily: 'GlacialIndifference',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                        color: Color(0xFF3A1A14),
+                      ),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   Widget _buildMoringaLoveBlogWidget(Map<String, dynamic> blogData) {
     return Container(
@@ -868,7 +878,10 @@ class _HomePageState extends State<HomePage> {
                         top: 12,
                         right: 12,
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
                           decoration: BoxDecoration(
                             color: const Color(0xFF47734E),
                             borderRadius: BorderRadius.circular(12),
@@ -888,7 +901,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              
+
               // Content
               Expanded(
                 child: Padding(
@@ -902,7 +915,9 @@ class _HomePageState extends State<HomePage> {
                           Container(
                             padding: const EdgeInsets.all(6),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF47734E).withValues(alpha: 0.1),
+                              color: const Color(
+                                0xFF47734E,
+                              ).withValues(alpha: 0.1),
                               shape: BoxShape.circle,
                             ),
                             child: Icon(
@@ -927,9 +942,9 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                       ),
-                      
+
                       const SizedBox(height: 8),
-                      
+
                       // Description
                       Expanded(
                         child: Text(
@@ -944,9 +959,9 @@ class _HomePageState extends State<HomePage> {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      
+
                       const SizedBox(height: 12),
-                      
+
                       // Read more indicator
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -963,7 +978,9 @@ class _HomePageState extends State<HomePage> {
                           Container(
                             padding: const EdgeInsets.all(4),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF47734E).withValues(alpha: 0.1),
+                              color: const Color(
+                                0xFF47734E,
+                              ).withValues(alpha: 0.1),
                               shape: BoxShape.circle,
                             ),
                             child: const Icon(
