@@ -70,6 +70,26 @@ class _HomePageState extends State<HomePage> {
   // REAL Moringa Love Blog articles from your website (LATEST TO OLDEST)
   final List<Map<String, dynamic>> _blogWidgets = [
     {
+      'title': 'Sediments in Your Moringa Oil? Here’s Why That’s a Good Thing',
+      'subtitle': 'Skin Health',
+      'icon': Icons.healing,
+      'url':
+          'https://www.moringaprojectthailand.com/blogs/news/sediments-in-your-moringa-oil-here-s-why-that-s-a-good-thingl',
+      'description':
+          'If you’ve ever noticed tiny particles or a bit of cloudiness at the bottom of your Moringa Facial Oil bottle, don’t worry. It’s not a sign that something’s wrong. In fact, it’s a clear indicator that your oil is real, raw, and unrefined.',
+      'imageUrl': 'assets/images/sediments.webp',
+    },
+    {
+      'title': 'Moringa Clay Face Mask Benefits: Natural Ingredients That Detox, Soothe, and Brighten Your Skin',
+      'subtitle': 'Skin Health',
+      'icon': Icons.healing,
+      'url':
+          'https://www.moringaprojectthailand.com/blogs/news/moringa-clay-face-mask-benefits-natural-ingredients-that-detox-soothe-and-brighten-your-skin',
+      'description':
+          'Your skin goes through a lot each day…pollution, makeup, sunscreen, late nights, stress. It’s constantly working to protect you, but sometimes it just needs a little reset.',
+      'imageUrl': 'assets/images/claymaskblog.webp',
+    },
+    {
       'title': '5 Things Nobody Tells You About Your Skin When You Travel',
       'subtitle': 'Travel & Wellness',
       'icon': Icons.flight_takeoff,
